@@ -114,8 +114,8 @@
   <footer>
     صنع بواسطة <strong>بونص Bonus</strong> · جميع الحقوق محفوظة 2025
   </footer>
-
   <script>
+    // دالة إضافة التعليقات
     function addComment() {
       const input = document.getElementById('commentInput');
       const list = document.getElementById('commentsList');
@@ -126,32 +126,31 @@
         input.value = '';
       }
     }
-  </script>
-<!-- أي محتوى موجود في الصفحة -->
-<a href="https://example.com">اضغط هنا للتسجيل في الموقع</a>
 
-<!-- أضف هذا الكود قبل </body> مباشرة -->
-<script>
-  const links = document.querySelectorAll('a');
-  links.forEach(link => {
-    if(link.textContent.includes("اضغط هنا للتسجيل في الموقع")) {
-      link.addEventListener("click", function() {
-        fetch("https://new01k.app.n8n.cloud/webhook/bonus", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            username: "مستخدم جديد",
-            action: "ضغط على رابط التسجيل",
-            url: link.href
-          })
-        });
+    // كود إرسال البيانات إلى Webhook عند الضغط على أي رابط تسجيل
+    document.addEventListener("DOMContentLoaded", function() {
+      const links = document.querySelectorAll('a');
+
+      links.forEach(link => {
+        if(link.textContent.includes("اضغط هنا لتسجيل الدخول في الموقع")) {
+          link.addEventListener("click", function() {
+            fetch("https://new01k.app.n8n.cloud/webhook/bonus", {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify({
+                username: "مستخدم جديد",
+                action: "ضغط على رابط التسجيل",
+                url: link.href
+              })
+            })
+            .then(response => console.log("تم إرسال البيانات بنجاح:", response))
+            .catch(error => console.error("خطأ في إرسال البيانات:", error));
+          });
+        }
       });
-    }
-  });
-</script>
-</body>
-</html>
+    });
+  </script>
 
 </body>
 </html>
-
+ 
