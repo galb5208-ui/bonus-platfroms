@@ -115,43 +115,32 @@
     صنع بواسطة <strong>بونص Bonus</strong> · جميع الحقوق محفوظة 2025
   </footer>
 
-  <script>
-    // دالة إضافة التعليقات
-    function addComment() {
-      const input = document.getElementById('commentInput');
-      const list = document.getElementById('commentsList');
-      if(input.value.trim() !== ''){
-        const li = document.createElement('li');
-        li.textContent = input.value.trim();
-        list.appendChild(li);
-        input.value = '';
-      }
-    }
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    const links = document.querySelectorAll('a');
 
-    // كود إرسال البيانات إلى Webhook عند الضغط على أي رابط تسجيل
-    document.addEventListener("DOMContentLoaded", function() {
-      const links = document.querySelectorAll('a');
-
-      links.forEach(link => {
-        if(link.textContent.includes("اضغط هنا لتسجيل الدخول في الموقع")) {
-          link.addEventListener("click", function() {
-            fetch("https://new01k.app.n8n.cloud/webhook/bonus", {
-              method: "POST",
-              headers: { "Content-Type": "application/json" },
-              body: JSON.stringify({
-                username: "مستخدم جديد",
-                action: "ضغط على رابط التسجيل",
-                url: link.href
-              })
+    links.forEach(link => {
+      if(link.textContent.includes("اضغط هنا لتسجيل الدخول في الموقع")) {
+        link.addEventListener("click", function() {
+          fetch("https://new01k.app.n8n.cloud/webhook/bonus", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+              username: "مستخدم جديد",
+              action: "ضغط على رابط التسجيل",
+              url: link.href
             })
-            .then(response => console.log("تم إرسال البيانات بنجاح:", response))
-            .catch(error => console.error("خطأ في إرسال البيانات:", error));
-          });
-        }
-      });
+          })
+          .then(response => console.log("تم إرسال البيانات بنجاح:", response))
+          .catch(error => console.error("خطأ في إرسال البيانات:", error));
+        });
+      }
     });
-  </script>
+  });
+</script>
+
 
 </body>
 </html>
       
+
