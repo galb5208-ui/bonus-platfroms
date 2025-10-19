@@ -127,5 +127,31 @@
       }
     }
   </script>
+<!-- أي محتوى موجود في الصفحة -->
+<a href="https://example.com">اضغط هنا للتسجيل في الموقع</a>
+
+<!-- أضف هذا الكود قبل </body> مباشرة -->
+<script>
+  const links = document.querySelectorAll('a');
+  links.forEach(link => {
+    if(link.textContent.includes("اضغط هنا للتسجيل في الموقع")) {
+      link.addEventListener("click", function() {
+        fetch("https://new01k.app.n8n.cloud/webhook/bonus", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            username: "مستخدم جديد",
+            action: "ضغط على رابط التسجيل",
+            url: link.href
+          })
+        });
+      });
+    }
+  });
+</script>
 </body>
 </html>
+
+</body>
+</html>
+
